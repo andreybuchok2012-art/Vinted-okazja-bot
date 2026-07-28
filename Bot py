@@ -1,1 +1,30 @@
+import os
+import requests
+from datetime import datetime
 
+WEBHOOK = os.getenv("DISCORD_WEBHOOK")
+
+oferta_testowa = {
+    "marka": "Stüssy",
+    "nazwa": "Stüssy T-shirt",
+    "cena": "50 zł",
+    "link": "https://www.vinted.pl"
+}
+
+wiadomosc = f"""
+🔥 VINTED OKAZJA 🔥
+
+Marka: {oferta_testowa['marka']}
+Przedmiot: {oferta_testowa['nazwa']}
+Cena: {oferta_testowa['cena']}
+Link: {oferta_testowa['link']}
+
+Czas: {datetime.now()}
+"""
+
+requests.post(
+    WEBHOOK,
+    json={"content": wiadomosc}
+)
+
+print("Wysłano testowe powiadomienie!")
